@@ -1,0 +1,86 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "build application",
+			"command": "/usr/bin/clang++",
+			"args": [
+				"-std=c++17",
+				"-fcolor-diagnostics",
+				"-fansi-escape-codes",
+				"-Wall",
+				"-g",
+				"-I${workspaceFolder}/ndGameLib/headers",
+				// "-I${workspaceFolder}/dependencies/include",
+				// "-L${workspaceFolder}/dependencies/lib",
+				// "${workspaceFolder}/dependencies/lib/libglfw.3.3.dylib",
+				"${workspaceFolder}/compiled/lib/ndGame.a",
+				"${workspaceFolder}/sandbox/src/*.cpp",
+				// "${workspaceFolder}/ndGameApp/src/glad.c",
+				"-o",
+				"${workspaceFolder}/application/application"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: /usr/bin/clang++"
+		},
+		{
+			"label": "Compile in library",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"build library object file",
+				"add object file to library"
+			],
+			"problemMatcher": []
+		},
+		{
+			"type": "cppbuild",
+			"label": "build library object file",
+			"command": "/usr/bin/clang++",
+			"args": [
+				"-std=c++17",
+				"-fcolor-diagnostics",
+				"-fansi-escape-codes",
+				"-g",
+				"-c",
+				// "-I${workspaceFolder}/ndGameLib/headers",
+				// "-I${workspaceFolder}/dependencies/include",
+				// "-L${workspaceFolder}/dependencies/lib",
+				// "${workspaceFolder}/dependencies/lib/libglfw.3.3.dylib",
+				"${file}",
+				"-o",
+				"${workspaceFolder}/compiled/objects/${fileBasenameNoExtension}.o"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+			"detail": "compiler: /usr/bin/clang++"
+		},
+		{
+			"type": "shell",
+			"label": "add object file to library",
+			"command": "ar",
+			"args": [
+				"rvs",
+				"${workspaceFolder}/compiled/lib/ndGame.a",
+				"${workspaceFolder}/compiled/objects/${fileBasenameNoExtension}.o"
+			]
+		}
+	]
+}
