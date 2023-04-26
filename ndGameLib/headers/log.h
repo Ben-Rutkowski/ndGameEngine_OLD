@@ -6,14 +6,15 @@
 class Log
 {
 private:
-    Entry log[512];
-    int   counter;
+    Entry  log[512];
+    Module module;
+    int    counter;
 
 public:
-    Log();
+    Log(Module mod_in);
 
     // Recording
-    void addSuccess(Module module, Operation operation , bool success);
+    void addSuccess(Operation operation , bool success);
 
     // Print
     void printLog(int len);

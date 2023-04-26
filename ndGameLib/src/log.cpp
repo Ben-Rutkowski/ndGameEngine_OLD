@@ -2,11 +2,11 @@
 #include <iostream>
 
 // Constructor
-Log::Log()
-: counter{ 0 } {}
+Log::Log(Module mod_in)
+: counter{ 0 }, module{ mod_in } {}
 
 // Recording --------------------------------
-void Log::addSuccess(Module module, Operation operation , bool success)
+void Log::addSuccess(Operation operation , bool success)
 {
     log[counter].metaData(module, operation, SUCCESS);
     log[counter].successData(success);

@@ -1,10 +1,11 @@
 #include "ndGameCore.h"
-#include "log.h"
-#include <iostream>
 
 int main()
 {
-    ndApp app;
+    ndApp    app;
+    // ndWindow window(WIDTH, HEIGHT, TITLE);
+
+    // app.attachWindow(&window);
 
     app.runApplication();
 
