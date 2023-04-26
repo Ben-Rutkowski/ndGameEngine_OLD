@@ -52,7 +52,7 @@
 				"-fansi-escape-codes",
 				"-g",
 				"-c",
-				// "-I${workspaceFolder}/ndGameLib/headers",
+				"-I${workspaceFolder}/ndGameLib/headers",
 				// "-I${workspaceFolder}/dependencies/include",
 				// "-L${workspaceFolder}/dependencies/lib",
 				// "${workspaceFolder}/dependencies/lib/libglfw.3.3.dylib",

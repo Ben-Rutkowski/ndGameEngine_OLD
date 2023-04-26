@@ -1,6 +1,12 @@
-#include "test.h"
+#include "ndGameCore.h"
+#include "log.h"
+#include <iostream>
 
 int main()
 {
-    my_print();
+    ndApp app;
+
+    app.runApplication();
+
+    app.displayLog(512);
 }
