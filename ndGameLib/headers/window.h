@@ -7,13 +7,21 @@
 class ndWindow
 {
 private:
-    GLFWwindow* glfw_window;
     Log         log;
+    GLFWwindow* glfw_window;
+    bool        should_close;
 public:
     ndWindow(int width, int height, const char* title);
 
+    // Gets
+    bool getShouldClose();
+
+    // Sets
+    void setShouldClose(bool value);
+
     // Log
     void printLog(int len);
+
 };
 
 #endif

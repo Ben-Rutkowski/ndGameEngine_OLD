@@ -10,11 +10,10 @@ void ndApp::attachWindow(ndWindow* window_in) { window = window_in; }
 // Runloop --------------------------------
 void ndApp::runApplication()
 {
-    bool run = true;
-    while (run)
+    while (!window->getShouldClose())
     {  
         log.addSuccess(START_RUN_LOOP, true);
-        run = false;
+        window->setShouldClose(true);
     }
 }
 

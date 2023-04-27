@@ -2,7 +2,7 @@
 
 // Constructor --------------------------------
 ndWindow::ndWindow(int width, int height, const char* title)
-: log(WINDOW)
+: log(WINDOW), should_close{ false }
 {
     // Initialize GLFW
     glfwInit();
@@ -27,6 +27,12 @@ ndWindow::ndWindow(int width, int height, const char* title)
     else 
         log.addSuccess(INIT_GLAD, true);   
 }
+
+// Gets
+bool ndWindow::getShouldClose() { return should_close; }
+
+// Sets
+void ndWindow::setShouldClose(bool value) { should_close = value; }
 
 // Log --------------------------------
 void ndWindow::printLog(int len) { log.printLog(len); }
