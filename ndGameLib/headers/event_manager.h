@@ -11,14 +11,15 @@ private:
     void*    app_ptr;
     evt_call event_callback;
 
-public: 
-    EventManager(void* ptr) : app_ptr{ ptr } {}
+private:
+    void callEvent(Event& event) { event_callback(app_ptr, event); }
 
-    // Sets
+public: 
+    // Initialization
+    EventManager(void* ptr);
     void setEventCallback(void* ptr);
 
     // Event
-    void callEvent(Event& event);
     void callKeyEvent(Key key);
 };
 

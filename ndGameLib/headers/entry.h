@@ -35,19 +35,16 @@ protected:
 protected:
     void printModule();
     void printOperation();
-
-    // Print
     void printSuccess();
 
 public:
+    // Initialization
     Entry();
-
-    // Print
-    void printEntry();
-
-    // Data
     void metaData(Module, EntryOperation, EntryType);
     void successData(bool success);
+
+    // Print
+    void printEntry();    
 };
 
 #endif

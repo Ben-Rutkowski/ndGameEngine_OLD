@@ -1,7 +1,7 @@
 #include "log.h"
 #include <iostream>
 
-// Constructor
+// Initialization --------------------------------
 Log::Log(Module mod_in)
 : counter{ 0 }, module{ mod_in } {}
 

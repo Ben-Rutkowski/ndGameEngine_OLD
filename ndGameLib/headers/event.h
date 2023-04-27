@@ -20,8 +20,6 @@ private:
 
 public:
     KeyEvent(Key key_in) : key{ key_in } {}
-
-    // Sets
     Key getKey() { return key; }
 };
 

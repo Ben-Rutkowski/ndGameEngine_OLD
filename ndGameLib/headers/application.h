@@ -13,25 +13,24 @@ private:
     ndWindow*    window;
     EventManager event_manager;
 
-public:
-    ndApp();
-
-    // Init
-    void attachWindow(ndWindow* window_in);
-    void init();
-
-    // Runloop
-    void runApplication();
+private:
     void pollInputs();
-
-    // Log
-    void printLog(int len);
-
-    // Events
     void distributeEvent(Event& event);
 
     // Callbacks
     static void eventCallback(void* ptr, Event& event);
+
+public:
+    // Initialization
+    ndApp();
+    void init();
+    void attachWindow(ndWindow* window_in);
+
+    // Runtime
+    void runApplication();
+    
+    // Log
+    void printLog(int len) { log.printLog(len); }
 };
 
 #endif

@@ -11,6 +11,7 @@ private:
     int    counter;
 
 public:
+    // Initialization
     Log(Module mod_in);
 
     // Recording

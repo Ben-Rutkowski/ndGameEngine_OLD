@@ -16,22 +16,18 @@ private:
     bool isPressed(int key);
 
 public:
+    // Initialization
     ndWindow(int width, int height, const char* title);
-
-    // Runtime
-    void pollInputs(EventManager& event_manager);
-
-    // Gets
-    bool getShouldClose();
-
-    // Sets
-    void setShouldClose(bool value);
-
-    // Log
-    void printLog(int len);
-
+    void setShouldClose(bool value) { should_close = value; }
+    bool getShouldClose()           { return should_close; }
+    
     // Events
     void runEvent(Event& event);
+    void pollInputs(EventManager& event_manager);
+
+    // Log
+    void printLog(int len) { log.printLog(len); }
+
 };
 
 #endif

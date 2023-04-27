@@ -1,11 +1,10 @@
 #include "application.h"
 #include <iostream>
 
-// Constructor --------------------------------
+// Initialization --------------------------------
 ndApp::ndApp()
 : log(APPLICATION), event_manager(this) {}
 
-// Init --------------------------------
 void ndApp::attachWindow(ndWindow* window_in) { window = window_in; }
 void ndApp::init()
 {
@@ -15,7 +14,7 @@ void ndApp::init()
     event_manager.setEventCallback(event_void);
 }
 
-// Runloop --------------------------------
+// Runtime --------------------------------
 void ndApp::runApplication()
 {
     log.addSuccess(START_RUN_LOOP, true);
@@ -26,18 +25,11 @@ void ndApp::runApplication()
     }
 }
 
-void ndApp::pollInputs() { window->pollInputs(event_manager); }
+// Private --------------------------------
+void ndApp::pollInputs()                  { window->pollInputs(event_manager); }
+void ndApp::distributeEvent(Event& event) { window->runEvent(event); }
 
-// Log --------------------------------
-void ndApp::printLog(int len) { log.printLog(len); }
-
-// Events --------------------------------
-void ndApp::distributeEvent(Event& event)
-{
-    window->runEvent(event);
-}
-
-// Callbacks --------------------------------
+// Callbacks 
 void ndApp::eventCallback(void* ptr, Event& event)
 {
     ndApp* app_ptr = static_cast<ndApp*>(ptr);

@@ -1,6 +1,6 @@
 #include "window.h"
 
-// Constructor --------------------------------
+// Initialization --------------------------------
 ndWindow::ndWindow(int width, int height, const char* title)
 : log(WINDOW), should_close{ false }
 {
@@ -26,7 +26,7 @@ ndWindow::ndWindow(int width, int height, const char* title)
         log.addSuccess(INIT_GLAD, false);
     else 
         log.addSuccess(INIT_GLAD, true);   
-}
+}          
 
 // Events --------------------------------
 void ndWindow::pollInputs(EventManager& event_manager)
@@ -41,15 +41,6 @@ void ndWindow::runEvent(Event& event)
 {
     log.addSuccess(TEST, true);
 }
-
-// Gets --------------------------------
-bool ndWindow::getShouldClose() { return should_close; }
-
-// Sets --------------------------------
-void ndWindow::setShouldClose(bool value) { should_close = value; }
-
-// Log --------------------------------
-void ndWindow::printLog(int len) { log.printLog(len); }
 
 // Private --------------------------------
 bool ndWindow::isPressed(int key) { return glfwGetKey(glfw_window, key) == GLFW_PRESS; }

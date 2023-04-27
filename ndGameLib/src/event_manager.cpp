@@ -1,6 +1,8 @@
 #include "event_manager.h"
 
-// Sets --------------------------------
+// Initialization --------------------------------
+EventManager::EventManager(void* ptr) : app_ptr{ ptr } {}
+
 void EventManager::setEventCallback(void* ptr)
 {
     evt_call callback = (evt_call)ptr;
@@ -8,7 +10,6 @@ void EventManager::setEventCallback(void* ptr)
 }
 
 // Event --------------------------------
-void EventManager::callEvent(Event& event) { event_callback(app_ptr, event); }
 void EventManager::callKeyEvent(Key key)
 {
     KeyEvent event(key);
