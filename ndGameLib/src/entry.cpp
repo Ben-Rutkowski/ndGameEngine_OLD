@@ -34,6 +34,9 @@ void Entry::printOperation()
     case CREATE_GLFW_WINDOW:
         std::cout << "CREATE_GLFW_WINDOW::";
         break;
+    case TEST:
+        std::cout << "TEST::";
+        break;
     }
 }
 

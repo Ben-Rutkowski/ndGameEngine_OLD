@@ -15,7 +15,8 @@ enum EntryOperation
     START_RUN_LOOP,
     INIT_GLFW,
     INIT_GLAD,
-    CREATE_GLFW_WINDOW
+    CREATE_GLFW_WINDOW,
+    TEST
 };
 
 enum Module

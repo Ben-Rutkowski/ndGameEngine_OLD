@@ -4,10 +4,11 @@
 int main()
 {
     ndApp    app;
-    ndWindow window(WIDTH, HEIGHT, TITLE);
 
+    ndWindow window(WIDTH, HEIGHT, TITLE);
     app.attachWindow(&window);
 
+    app.init();
     app.runApplication();
 
     app.printLog(512);

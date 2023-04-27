@@ -28,11 +28,28 @@ ndWindow::ndWindow(int width, int height, const char* title)
         log.addSuccess(INIT_GLAD, true);   
 }
 
-// Gets
+// Events --------------------------------
+void ndWindow::pollInputs(EventManager& event_manager)
+{
+    if (isPressed(GLFW_KEY_ESCAPE))
+        event_manager.callKeyEvent(ESCAPE_KEY);
+    if (true)
+        event_manager.callKeyEvent(ESCAPE_KEY);
+}
+
+void ndWindow::runEvent(Event& event)
+{
+    log.addSuccess(TEST, true);
+}
+
+// Gets --------------------------------
 bool ndWindow::getShouldClose() { return should_close; }
 
-// Sets
+// Sets --------------------------------
 void ndWindow::setShouldClose(bool value) { should_close = value; }
 
 // Log --------------------------------
 void ndWindow::printLog(int len) { log.printLog(len); }
+
+// Private --------------------------------
+bool ndWindow::isPressed(int key) { return glfwGetKey(glfw_window, key) == GLFW_PRESS; }

@@ -6,7 +6,7 @@ Log::Log(Module mod_in)
 : counter{ 0 }, module{ mod_in } {}
 
 // Recording --------------------------------
-void Log::addSuccess(Operation operation , bool success)
+void Log::addSuccess(EntryOperation operation , bool success)
 {
     log[counter].metaData(module, operation, SUCCESS);
     log[counter].successData(success);

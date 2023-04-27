@@ -14,7 +14,7 @@ public:
     Log(Module mod_in);
 
     // Recording
-    void addSuccess(Operation operation , bool success);
+    void addSuccess(EntryOperation operation , bool success);
 
     // Print
     void printLog(int len);
