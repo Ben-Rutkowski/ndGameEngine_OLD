@@ -7,16 +7,34 @@ Entry::Entry()
 
 void Entry::printModule()
 {
-    if (module == APPLICATION)
+    switch (module)
+    {
+    case APPLICATION:
         std::cout << "APPLICATION::";
+        break;
+    case WINDOW:
+        std::cout << "WINDOW::";
+        break;
+    }
 }
 
 void Entry::printOperation()
 {
-    if (operation == START_APP)
-        std::cout << "START_APP::";
-    if (operation == START_RUN_LOOP)
+    switch (operation)
+    {
+    case START_RUN_LOOP:
         std::cout << "START_RUN_LOOP::";
+        break;
+    case INIT_GLFW:
+        std::cout << "INIT_GLFW::";
+        break;
+    case INIT_GLAD:
+        std::cout << "INIT_GLAD::";
+        break;
+    case CREATE_GLFW_WINDOW:
+        std::cout << "CREATE_GLFW_WINDOW::";
+        break;
+    }
 }
 
 // Print --------------------------------

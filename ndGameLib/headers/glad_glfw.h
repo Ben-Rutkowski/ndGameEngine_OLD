@@ -1,7 +1,5 @@
-#ifndef GLAD_GLFW
-#define GLAD_GLFW
-
+#ifndef GLAD_GLFW_H
+#define GLAD_GLFW_H
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
-
 #endif

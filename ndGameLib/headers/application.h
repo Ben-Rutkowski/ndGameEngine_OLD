@@ -20,7 +20,7 @@ public:
     void runApplication();
 
     // Log
-    void displayLog(int len);
+    void printLog(int len);
 };
 
 #endif

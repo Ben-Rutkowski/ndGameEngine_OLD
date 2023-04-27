@@ -12,15 +12,18 @@ enum Operation
 {
     NULL_OPERATION,
 
-    START_APP,
-    START_RUN_LOOP
+    START_RUN_LOOP,
+    INIT_GLFW,
+    INIT_GLAD,
+    CREATE_GLFW_WINDOW
 };
 
 enum Module
 {
     NULL_MODULE,
 
-    APPLICATION
+    APPLICATION,
+    WINDOW
 };
 
 class Entry

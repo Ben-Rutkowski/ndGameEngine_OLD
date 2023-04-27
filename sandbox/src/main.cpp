@@ -1,13 +1,15 @@
 #include "ndGameCore.h"
+#include "glad_glfw.h"
 
 int main()
 {
     ndApp    app;
-    // ndWindow window(WIDTH, HEIGHT, TITLE);
+    ndWindow window(WIDTH, HEIGHT, TITLE);
 
-    // app.attachWindow(&window);
+    app.attachWindow(&window);
 
     app.runApplication();
 
-    app.displayLog(512);
+    app.printLog(512);
+    window.printLog(512);
 }

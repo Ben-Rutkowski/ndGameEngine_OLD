@@ -7,9 +7,13 @@
 class ndWindow
 {
 private:
-    Log log;
+    GLFWwindow* glfw_window;
+    Log         log;
 public:
     ndWindow(int width, int height, const char* title);
+
+    // Log
+    void printLog(int len);
 };
 
 #endif

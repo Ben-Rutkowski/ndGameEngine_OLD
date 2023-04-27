@@ -54,8 +54,8 @@
 				"-c",
 				"-I${workspaceFolder}/ndGameLib/headers",
 				"-I${workspaceFolder}/dependencies/include",
-				"-L${workspaceFolder}/dependencies/lib",
-				"${workspaceFolder}/dependencies/lib/libglfw.3.3.dylib",
+				// "-L${workspaceFolder}/dependencies/lib",
+				// "${workspaceFolder}/dependencies/lib/libglfw.3.3.dylib",
 				"${file}",
 				"-o",
 				"${workspaceFolder}/compiled/objects/${fileBasenameNoExtension}.o"

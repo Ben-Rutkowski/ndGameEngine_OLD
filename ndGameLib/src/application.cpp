@@ -10,7 +10,6 @@ void ndApp::attachWindow(ndWindow* window_in) { window = window_in; }
 // Runloop --------------------------------
 void ndApp::runApplication()
 {
-    log.addSuccess(START_APP, true);
     bool run = true;
     while (run)
     {  
@@ -20,4 +19,4 @@ void ndApp::runApplication()
 }
 
 // Log
-void ndApp::displayLog(int len) { log.printLog(len); }
+void ndApp::printLog(int len) { log.printLog(len); }
