@@ -21,7 +21,7 @@ ndWindow::ndWindow(int width, int height, const char* title)
 
     glfwMakeContextCurrent(glfw_window);
 
-    // Init GLAD
+    // Initialize GLAD
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         log.addSuccess(INIT_GLAD, false);
     else 

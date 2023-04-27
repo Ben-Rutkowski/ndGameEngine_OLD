@@ -10,6 +10,7 @@ private:
     Log         log;
     GLFWwindow* glfw_window;
     bool        should_close;
+
 public:
     ndWindow(int width, int height, const char* title);
 
@@ -21,7 +22,6 @@ public:
 
     // Log
     void printLog(int len);
-
 };
 
 #endif

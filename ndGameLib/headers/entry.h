@@ -1,14 +1,14 @@
 #ifndef ENTRY_H
 #define ENTRY_H
 
-enum Type
+enum EntryType
 {
     NULL_TYPE,
 
     SUCCESS
 };
 
-enum Operation
+enum EntryOperation
 {
     NULL_OPERATION,
 
@@ -45,7 +45,7 @@ public:
     void printEntry();
 
     // Data
-    void metaData(Module, Operation, Type);
+    void metaData(Module, EntryOperation, EntryType);
     void successData(bool success);
 };
 

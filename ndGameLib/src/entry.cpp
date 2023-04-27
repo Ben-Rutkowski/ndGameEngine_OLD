@@ -56,7 +56,7 @@ void Entry::printSuccess()
 }
 
 // Data --------------------------------
-void Entry::metaData(Module mod_in, Operation op_in, Type type_in)
+void Entry::metaData(Module mod_in, EntryOperation op_in, EntryType type_in)
 {
     module    = mod_in;
     operation = op_in;

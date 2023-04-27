@@ -1,6 +1,7 @@
 #include "application.h"
 #include <iostream>
 
+// Constructor
 ndApp::ndApp()
 : log(APPLICATION) {}
 
@@ -10,9 +11,9 @@ void ndApp::attachWindow(ndWindow* window_in) { window = window_in; }
 // Runloop --------------------------------
 void ndApp::runApplication()
 {
+    log.addSuccess(START_RUN_LOOP, true);
     while (!window->getShouldClose())
     {  
-        log.addSuccess(START_RUN_LOOP, true);
         window->setShouldClose(true);
     }
 }
