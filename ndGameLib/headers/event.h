@@ -3,30 +3,31 @@
 
 enum class EventType
 {
-    None,
-    KEY, RESIZE
+    KEY, CLOSE, RESIZE
 };
 
 enum class Key
 {
+    NULL_KEY,
+
     ESCAPE_KEY
 };
 
 class Event
 {
-private:
-    EventType type;
-
+private: EventType type;
 public:
     Event(EventType type_in);
+    EventType getType();
+    virtual Key getKey();
+    virtual int getWidth();
+    virtual int getHeight();
 };
 
 // Key Event --------------------------------
 class KeyEvent : public Event
 {
-private:
-    Key key;
-
+private: Key key;
 public:
     KeyEvent(Key key_in);
     Key getKey();
@@ -35,9 +36,7 @@ public:
 // Resize Event --------------------------------
 class ResizeEvent : public Event
 {
-private:
-    int width, height;
-
+private: int width, height;
 public:
     ResizeEvent(int wdth_in, int hght_in);
     int getWidth();

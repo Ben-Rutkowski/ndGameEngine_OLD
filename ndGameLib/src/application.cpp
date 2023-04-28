@@ -1,3 +1,4 @@
+#define APPLICATION_MACROS
 #include "application.h"
 #include <iostream>
 
@@ -12,10 +13,7 @@ void ndApp::attachWindow(ndWindow* window_in)
     window->setCallbacks();
 }
 
-void ndApp::init()
-{
-    setEventCallback();
-}
+void ndApp::init() { setEventCallback(); }
 
 // Runtime --------------------------------
 void ndApp::runApplication()
@@ -35,19 +33,21 @@ void ndApp::printLog(int len) { log.printLog(len); }
 void ndApp::pollInputs()                  { window->pollInputs(event_manager); }
 void ndApp::startLoopFrame()              {}
 void ndApp::endLoopFrame()                { window->endLoopFrame(); }
-void ndApp::distributeEvent(Event& event) { window->runEvent(event); }
+void ndApp::distributeEvent(Event& event) 
+{
+    window->runEvent(event);
+}
 
 // Set callbacks
 void ndApp::setEventCallback()
 {
-    void(*event_ptr)(void*, Event&) = ndApp::eventCallback;
-    void* event_void = (void*)(event_ptr);
-    event_manager.setEventCallback(event_void);
+    GET_CALLBACK(ndApp::eventCallback, callback)
+    event_manager.setEventCallback(callback);
 }
 
 // STATIC Callbacks 
 void ndApp::eventCallback(void* ptr, Event& event)
 {
-    ndApp* app_ptr = static_cast<ndApp*>(ptr);
-    app_ptr->distributeEvent(event);
+    GET_APP(ptr, app)
+    app->distributeEvent(event);
 }

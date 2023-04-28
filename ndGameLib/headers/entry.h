@@ -12,7 +12,7 @@ enum class EntryOperation
 {
     NULL_OPERATION,
 
-    START_RUN_LOOP, 
+    START_RUN_LOOP, CLOSE,
     INIT_GLFW, INIT_GLAD,
     CREATE_GLFW_WINDOW,
     TEST

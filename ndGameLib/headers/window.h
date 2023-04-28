@@ -9,14 +9,21 @@ class ndWindow
 {
 private:
     int width, height;
+    EventManager* event_manager;
     GLFWwindow*   glfw_window;
     Log           log;
 
 private:
     bool isPressed(int key);
 
-    // Callbacks
+    // On events
+    void onKey(Event& event);
+    void onClose(Event& event);
+
+    // STATIC
     static void resizeCallback(GLFWwindow*, int, int);
+    static void closeCallback(GLFWwindow*);
+    static EventManager* getManager(GLFWwindow*);
 
 public:
     // Initialization

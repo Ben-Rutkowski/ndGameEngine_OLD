@@ -1,3 +1,4 @@
+#define WINDOW_MACROS
 #include "window.h"
 
 // Initialization --------------------------------
@@ -32,11 +33,17 @@ ndWindow::ndWindow(int width_in, int height_in, const char* title)
 void ndWindow::setCallbacks()
 {
     glfwSetWindowSizeCallback(glfw_window, ndWindow::resizeCallback);
+    glfwSetWindowCloseCallback(glfw_window, ndWindow::closeCallback);
 }
 
-void ndWindow::setEventManager(void* ptr)  { glfwSetWindowUserPointer(glfw_window, ptr); }
 void ndWindow::setShouldClose(bool value) { glfwSetWindowShouldClose(glfw_window, true); }
 bool ndWindow::getShouldClose()           { return glfwWindowShouldClose(glfw_window); }
+void ndWindow::setEventManager(void* ptr)
+{
+    event_manager = (EventManager*)ptr;
+    glfwSetWindowUserPointer(glfw_window, ptr);
+}
+
 void ndWindow::setDimensions(int width_in, int height_in) 
 {
     width  = width_in;
@@ -59,19 +66,42 @@ void ndWindow::pollInputs(EventManager& event_manager)
 
 void ndWindow::runEvent(Event& event)
 {
-    setShouldClose(true);
+    switch (event.getType())
+    {
+    case EventType::KEY:   onKey(event);   break;
+    case EventType::CLOSE: onClose(event); break;
+    default:;
+    }
 }
 
 // Log --------------------------------
 void ndWindow::printLog(int len) { log.printLog(len); }
 
-// Private --------------------------------
+// PRIVATE --------------------------------
 bool ndWindow::isPressed(int key) { return glfwGetKey(glfw_window, key) == GLFW_PRESS; }
 
-// STATIC Callbacks
-void ndWindow::resizeCallback(GLFWwindow* window, int width, int height)
+// On events 
+void ndWindow::onKey(Event& event)
+{
+    switch (event.getKey())
+    {
+    case Key::ESCAPE_KEY: event_manager->callCloseEvent(); break;
+    default:;
+    }
+}
+
+void ndWindow::onClose(Event& event)
+{
+    log.addSuccess(EntryOperation::CLOSE, true);
+    setShouldClose(true);
+}
+
+// STATIC
+void ndWindow::resizeCallback(GLFWwindow* window, int width, int height) { getManager(window)->callResizeEvent(width, height); } 
+void ndWindow::closeCallback(GLFWwindow* window)                         { getManager(window)->callCloseEvent(); }
+
+EventManager* ndWindow::getManager(GLFWwindow* window)
 {
     void* ptr = glfwGetWindowUserPointer(window);
-    EventManager* event_manager = static_cast<EventManager*>(ptr);
-    event_manager->callResize(width, height);
-} 
+    return static_cast<EventManager*>(ptr);
+}

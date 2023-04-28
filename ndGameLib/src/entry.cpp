@@ -56,6 +56,7 @@ void Entry::printOperation()
     switch (operation)
     {
     case EntryOperation::START_RUN_LOOP:     std::cout << "START_RUN_LOOP::";     break;
+    case EntryOperation::CLOSE:              std::cout << "CLOSE::";              break;
     case EntryOperation::INIT_GLFW:          std::cout << "INIT_GLFW::";          break;
     case EntryOperation::INIT_GLAD:          std::cout << "INIT_GLAD::";          break;
     case EntryOperation::CREATE_GLFW_WINDOW: std::cout << "CREATE_GLFW_WINDOW::"; break;

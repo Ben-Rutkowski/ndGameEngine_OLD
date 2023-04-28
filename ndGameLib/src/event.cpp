@@ -2,6 +2,10 @@
 
 // Event --------------------------------
 Event::Event(EventType type_in) : type{ type_in } {}
+EventType Event::getType()   { return type; }
+Key       Event::getKey()    { return Key::NULL_KEY; }
+int       Event::getWidth()  { return 0; }
+int       Event::getHeight() { return 0; }
 
 // Key Event --------------------------------
 KeyEvent::KeyEvent(Key key_in) : Event(EventType::KEY), key{ key_in } {}

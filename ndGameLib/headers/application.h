@@ -37,3 +37,13 @@ private:
 };
 
 #endif
+
+#ifdef APPLICATION_MACROS
+
+#define GET_CALLBACK(FUNCTION, CALLBACK) \
+    void(*event_ptr)(void*, Event&) = FUNCTION; \
+    void* CALLBACK = (void*)(event_ptr); \
+
+#define GET_APP(PTR, APP) ndApp* APP = static_cast<ndApp*>(PTR);
+
+#endif
