@@ -2,7 +2,7 @@
 
 // Initialization --------------------------------
 ndWindow::ndWindow(int width_in, int height_in, const char* title)
-: log(WINDOW), width{ width_in }, height{ height_in }
+: log(Module::WINDOW), width{ width_in }, height{ height_in }
 {
     // Initialize GLFW
     glfwInit();
@@ -10,23 +10,23 @@ ndWindow::ndWindow(int width_in, int height_in, const char* title)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    log.addSuccess(INIT_GLFW, true);
+    log.addSuccess(EntryOperation::INIT_GLFW, true);
 
     // Create GLFW window
     glfw_window = glfwCreateWindow(width, height, title, NULL, NULL);
     if (glfw_window == NULL)
-        log.addSuccess(CREATE_GLFW_WINDOW, false);
+        log.addSuccess(EntryOperation::CREATE_GLFW_WINDOW, false);
     else
-        log.addSuccess(CREATE_GLFW_WINDOW, true);
+        log.addSuccess(EntryOperation::CREATE_GLFW_WINDOW, true);
 
     // Set current window 
     glfwMakeContextCurrent(glfw_window);
 
     // Initialize GLAD
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-        log.addSuccess(INIT_GLAD, false);
+        log.addSuccess(EntryOperation::INIT_GLAD, false);
     else 
-        log.addSuccess(INIT_GLAD, true);  
+        log.addSuccess(EntryOperation::INIT_GLAD, true);  
 }
 
 void ndWindow::setCallbacks()
@@ -54,7 +54,7 @@ void ndWindow::endLoopFrame()
 void ndWindow::pollInputs(EventManager& event_manager)
 {
     if (isPressed(GLFW_KEY_ESCAPE))
-        event_manager.callKeyEvent(ESCAPE_KEY);
+        event_manager.callKeyEvent(Key::ESCAPE_KEY);
 }
 
 void ndWindow::runEvent(Event& event)

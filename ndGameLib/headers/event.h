@@ -1,13 +1,13 @@
 #ifndef EVENT_H
 #define EVENT_H
 
-enum EventType
+enum class EventType
 {
     None,
     KEY, RESIZE
 };
 
-enum Key
+enum class Key
 {
     ESCAPE_KEY
 };
@@ -40,6 +40,8 @@ private:
 
 public:
     ResizeEvent(int wdth_in, int hght_in);
+    int getWidth();
+    int getHeight();
 };
 
 #endif

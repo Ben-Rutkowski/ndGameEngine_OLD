@@ -1,14 +1,14 @@
 #ifndef ENTRY_H
 #define ENTRY_H
 
-enum EntryType
+enum class EntryType
 {
     NULL_TYPE,
 
     SUCCESS
 };
 
-enum EntryOperation
+enum class EntryOperation
 {
     NULL_OPERATION,
 
@@ -18,7 +18,7 @@ enum EntryOperation
     TEST
 };
 
-enum Module
+enum class Module
 {
     NULL_MODULE,
 
@@ -29,7 +29,10 @@ enum Module
 class Entry
 {
 protected:
-    int module, operation, type, data;
+    EntryType      type;
+    Module         module;
+    EntryOperation operation;
+    int            data;
 
 protected:
     void printModule();

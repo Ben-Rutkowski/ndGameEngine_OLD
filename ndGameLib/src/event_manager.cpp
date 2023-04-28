@@ -3,7 +3,6 @@
 
 // Initialization --------------------------------
 EventManager::EventManager(void* ptr) : app_ptr{ ptr } {}
-
 void EventManager::setEventCallback(void* ptr)
 {
     evt_call callback = (evt_call)ptr;

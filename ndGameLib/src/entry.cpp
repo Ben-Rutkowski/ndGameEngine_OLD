@@ -3,7 +3,10 @@
 
 // Initialization --------------------------------
 Entry::Entry()
-: operation{ 0 }, module{ 0 }, type{ 0 }, data{ 0 } {}
+: type{ EntryType::NULL_TYPE },
+  module{ Module::NULL_MODULE },
+  operation{ EntryOperation::NULL_OPERATION },
+  data{ 0 } {}
 
 void Entry::metaData(Module mod_in, EntryOperation op_in, EntryType type_in)
 {
@@ -21,7 +24,7 @@ void Entry::successData(bool success)
 // Print --------------------------------
 void Entry::printEntry()
 {
-    if (type == SUCCESS)
+    if (type == EntryType::SUCCESS)
         printSuccess();
 }
 
@@ -30,23 +33,21 @@ void Entry::printSuccess()
 {
     printModule();
     printOperation();
-    
-    if (data == 0x00000001)
-        std::cout << " Success" << std::endl;
-    else
-        std::cout << " Failure" << std::endl;
+       
+    switch (data)
+    {
+    case 0x00000001: std::cout << " Success" << std::endl; break;
+    default:         std::cout << " Failure" << std::endl;
+    }
 }
 
 void Entry::printModule()
 {
     switch (module)
     {
-    case APPLICATION:
-        std::cout << "APPLICATION::";
-        break;
-    case WINDOW:
-        std::cout << "WINDOW::";
-        break;
+    case Module::APPLICATION: std::cout << "APPLICATION::"; break;
+    case Module::WINDOW:      std::cout << "WINDOW::";      break;
+    default:;
     }
 }
 
@@ -54,20 +55,11 @@ void Entry::printOperation()
 {
     switch (operation)
     {
-    case START_RUN_LOOP:
-        std::cout << "START_RUN_LOOP::";
-        break;
-    case INIT_GLFW:
-        std::cout << "INIT_GLFW::";
-        break;
-    case INIT_GLAD:
-        std::cout << "INIT_GLAD::";
-        break;
-    case CREATE_GLFW_WINDOW:
-        std::cout << "CREATE_GLFW_WINDOW::";
-        break;
-    case TEST:
-        std::cout << "TEST::";
-        break;
+    case EntryOperation::START_RUN_LOOP:     std::cout << "START_RUN_LOOP::";     break;
+    case EntryOperation::INIT_GLFW:          std::cout << "INIT_GLFW::";          break;
+    case EntryOperation::INIT_GLAD:          std::cout << "INIT_GLAD::";          break;
+    case EntryOperation::CREATE_GLFW_WINDOW: std::cout << "CREATE_GLFW_WINDOW::"; break;
+    case EntryOperation::TEST:               std::cout << "TEST::";               break;
+    default:;
     }
 }

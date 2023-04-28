@@ -2,13 +2,12 @@
 #include <iostream>
 
 // Initialization --------------------------------
-Log::Log(Module mod_in)
-: counter{ 0 }, module{ mod_in } {}
+Log::Log(Module mod_in) : counter{ 0 }, module{ mod_in } {}
 
 // Recording --------------------------------
 void Log::addSuccess(EntryOperation operation , bool success)
 {
-    log[counter].metaData(module, operation, SUCCESS);
+    log[counter].metaData(module, operation, EntryType::SUCCESS);
     log[counter].successData(success);
     counter++;
 }

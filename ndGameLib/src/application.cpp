@@ -3,7 +3,7 @@
 
 // Initialization --------------------------------
 ndApp::ndApp()
-: log(APPLICATION), event_manager(this) {}
+: log(Module::APPLICATION), event_manager(this) {}
 
 void ndApp::attachWindow(ndWindow* window_in)
 {
@@ -20,7 +20,7 @@ void ndApp::init()
 // Runtime --------------------------------
 void ndApp::runApplication()
 {
-    log.addSuccess(START_RUN_LOOP, true);
+    log.addSuccess(EntryOperation::START_RUN_LOOP, true);
     while (!window->getShouldClose())
     {
         pollInputs();
