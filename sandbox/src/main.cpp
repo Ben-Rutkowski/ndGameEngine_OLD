@@ -4,7 +4,6 @@
 int main()
 {
     ndApp    app;
-
     ndWindow window(WIDTH, HEIGHT, TITLE);
     app.attachWindow(&window);
 

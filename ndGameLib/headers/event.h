@@ -23,4 +23,14 @@ public:
     Key getKey() { return key; }
 };
 
+// Resize Event --------------------------------
+// class ResaizeEvent : public Event
+// {
+// private:
+//     int width, height;
+
+// public:
+//     ResizeEvent(int wdth_in, int hght_in);
+// };
+
 #endif

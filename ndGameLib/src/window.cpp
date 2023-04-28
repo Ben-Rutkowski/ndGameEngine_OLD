@@ -1,8 +1,8 @@
 #include "window.h"
 
 // Initialization --------------------------------
-ndWindow::ndWindow(int width, int height, const char* title)
-: log(WINDOW), should_close{ false }
+ndWindow::ndWindow(int width_in, int height_in, const char* title)
+: log(WINDOW), width{ width_in }, height{ height_in }
 {
     // Initialize GLFW
     glfwInit();
@@ -19,28 +19,56 @@ ndWindow::ndWindow(int width, int height, const char* title)
     else
         log.addSuccess(CREATE_GLFW_WINDOW, true);
 
+    // Set current window 
     glfwMakeContextCurrent(glfw_window);
 
     // Initialize GLAD
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         log.addSuccess(INIT_GLAD, false);
     else 
-        log.addSuccess(INIT_GLAD, true);   
-}          
+        log.addSuccess(INIT_GLAD, true);  
+}
+
+void ndWindow::setCallbacks()
+{
+    glfwSetWindowSizeCallback(glfw_window, ndWindow::resizeCallback);
+}
+
+void ndWindow::setEventManager(void* ptr)  { glfwSetWindowUserPointer(glfw_window, ptr); }
+void ndWindow::setShouldClose(bool value) { glfwSetWindowShouldClose(glfw_window, true); }
+bool ndWindow::getShouldClose()           { return glfwWindowShouldClose(glfw_window); }
+void ndWindow::setDimensions(int width_in, int height_in) 
+{
+    width  = width_in;
+    height = height_in;
+}
+
+// Runtime --------------------------------
+void ndWindow::endLoopFrame()
+{
+    glfwPollEvents();
+    glfwSwapBuffers(glfw_window);
+}
 
 // Events --------------------------------
 void ndWindow::pollInputs(EventManager& event_manager)
 {
     if (isPressed(GLFW_KEY_ESCAPE))
         event_manager.callKeyEvent(ESCAPE_KEY);
-    if (true)
-        event_manager.callKeyEvent(ESCAPE_KEY);
 }
 
 void ndWindow::runEvent(Event& event)
 {
-    log.addSuccess(TEST, true);
+    setShouldClose(true);
 }
 
 // Private --------------------------------
 bool ndWindow::isPressed(int key) { return glfwGetKey(glfw_window, key) == GLFW_PRESS; }
+
+// STATIC Callbacks
+void ndWindow::resizeCallback(GLFWwindow* window, int width, int height)
+{
+    void* ptr = glfwGetWindowUserPointer(window);
+    EventManager* event_manager = static_cast<EventManager*>(ptr);
+    event_manager->callResize(width, height);
+} 

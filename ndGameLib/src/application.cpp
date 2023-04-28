@@ -5,13 +5,16 @@
 ndApp::ndApp()
 : log(APPLICATION), event_manager(this) {}
 
-void ndApp::attachWindow(ndWindow* window_in) { window = window_in; }
+void ndApp::attachWindow(ndWindow* window_in)
+{
+    window = window_in;
+    window->setEventManager(&event_manager);
+    window->setCallbacks();
+}
+
 void ndApp::init()
 {
-    // Set event callback
-    void(*event_ptr)(void*, Event&) = ndApp::eventCallback;
-    void* event_void = (void*)(event_ptr);
-    event_manager.setEventCallback(event_void);
+    setEventCallback();
 }
 
 // Runtime --------------------------------
@@ -21,15 +24,25 @@ void ndApp::runApplication()
     while (!window->getShouldClose())
     {
         pollInputs();
-        window->setShouldClose(true);
+        endLoopFrame();
     }
 }
 
 // Private --------------------------------
 void ndApp::pollInputs()                  { window->pollInputs(event_manager); }
+void ndApp::startLoopFrame()              {}
+void ndApp::endLoopFrame()                { window->endLoopFrame(); }
 void ndApp::distributeEvent(Event& event) { window->runEvent(event); }
 
-// Callbacks 
+// Set callbacks
+void ndApp::setEventCallback()
+{
+    void(*event_ptr)(void*, Event&) = ndApp::eventCallback;
+    void* event_void = (void*)(event_ptr);
+    event_manager.setEventCallback(event_void);
+}
+
+// STATIC Callbacks 
 void ndApp::eventCallback(void* ptr, Event& event)
 {
     ndApp* app_ptr = static_cast<ndApp*>(ptr);

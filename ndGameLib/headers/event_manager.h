@@ -21,6 +21,7 @@ public:
 
     // Event
     void callKeyEvent(Key key);
+    void callResize(int width, int height);
 };
 
 #endif

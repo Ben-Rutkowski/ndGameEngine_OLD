@@ -15,9 +15,12 @@ private:
 
 private:
     void pollInputs();
+    void startLoopFrame();
+    void endLoopFrame();
     void distributeEvent(Event& event);
 
     // Callbacks
+    void setEventCallback();
     static void eventCallback(void* ptr, Event& event);
 
 public:

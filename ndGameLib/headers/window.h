@@ -1,6 +1,6 @@
 #include "glad_glfw.h"
-#include "log.h"
 #include "event_manager.h"
+#include "log.h"
 
 #ifndef WINDOW_H
 #define WINDOW_H
@@ -8,18 +8,27 @@
 class ndWindow
 {
 private:
-    Log         log;
-    GLFWwindow* glfw_window;
-    bool        should_close;
+    int width, height;
+    GLFWwindow*   glfw_window;
+    Log           log;
 
 private:
     bool isPressed(int key);
 
+    // Callbacks
+    static void resizeCallback(GLFWwindow*, int, int);
+
 public:
     // Initialization
     ndWindow(int width, int height, const char* title);
-    void setShouldClose(bool value) { should_close = value; }
-    bool getShouldClose()           { return should_close; }
+    void setCallbacks();
+    void setEventManager(void* ptr);
+    void setDimensions(int width_in, int height_in);
+    void setShouldClose(bool value);
+    bool getShouldClose();
+
+    // Runtime
+    void endLoopFrame();
     
     // Events
     void runEvent(Event& event);
@@ -27,7 +36,6 @@ public:
 
     // Log
     void printLog(int len) { log.printLog(len); }
-
 };
 
 #endif
