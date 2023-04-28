@@ -35,7 +35,7 @@ public:
     void pollInputs(EventManager& event_manager);
 
     // Log
-    void printLog(int len) { log.printLog(len); }
+    void printLog(int len);
 };
 
 #endif

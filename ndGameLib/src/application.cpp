@@ -28,6 +28,9 @@ void ndApp::runApplication()
     }
 }
 
+// Log --------------------------------
+void ndApp::printLog(int len) { log.printLog(len); }
+
 // Private --------------------------------
 void ndApp::pollInputs()                  { window->pollInputs(event_manager); }
 void ndApp::startLoopFrame()              {}

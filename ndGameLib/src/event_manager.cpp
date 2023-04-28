@@ -13,11 +13,14 @@ void EventManager::setEventCallback(void* ptr)
 // Event --------------------------------
 void EventManager::callKeyEvent(Key key)
 {
-    KeyEvent event(key);
-    callEvent(event);
+    KeyEvent key_event(key);
+    callEvent(key_event);
 }
 
 void EventManager::callResize(int width, int height)
 {
     // TODO: create resize event
 }
+
+// Private --------------------------------
+void EventManager::callEvent(Event& event) { event_callback(app_ptr, event); }

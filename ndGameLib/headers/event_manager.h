@@ -12,7 +12,7 @@ private:
     evt_call event_callback;
 
 private:
-    void callEvent(Event& event) { event_callback(app_ptr, event); }
+    void callEvent(Event& event);
 
 public: 
     // Initialization

@@ -13,16 +13,6 @@ private:
     ndWindow*    window;
     EventManager event_manager;
 
-private:
-    void pollInputs();
-    void startLoopFrame();
-    void endLoopFrame();
-    void distributeEvent(Event& event);
-
-    // Callbacks
-    void setEventCallback();
-    static void eventCallback(void* ptr, Event& event);
-
 public:
     // Initialization
     ndApp();
@@ -33,7 +23,17 @@ public:
     void runApplication();
     
     // Log
-    void printLog(int len) { log.printLog(len); }
+    void printLog(int len);
+
+private:
+    void pollInputs();
+    void startLoopFrame();
+    void endLoopFrame();
+    void distributeEvent(Event& event);
+
+    // Callbacks
+    void setEventCallback();
+    static void eventCallback(void* ptr, Event& event);
 };
 
 #endif

@@ -12,9 +12,8 @@ enum EntryOperation
 {
     NULL_OPERATION,
 
-    START_RUN_LOOP,
-    INIT_GLFW,
-    INIT_GLAD,
+    START_RUN_LOOP, 
+    INIT_GLFW, INIT_GLAD,
     CREATE_GLFW_WINDOW,
     TEST
 };

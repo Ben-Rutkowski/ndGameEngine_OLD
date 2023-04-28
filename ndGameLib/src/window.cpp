@@ -62,6 +62,9 @@ void ndWindow::runEvent(Event& event)
     setShouldClose(true);
 }
 
+// Log --------------------------------
+void ndWindow::printLog(int len) { log.printLog(len); }
+
 // Private --------------------------------
 bool ndWindow::isPressed(int key) { return glfwGetKey(glfw_window, key) == GLFW_PRESS; }
 
