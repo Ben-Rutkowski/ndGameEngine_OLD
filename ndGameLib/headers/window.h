@@ -19,6 +19,7 @@ private:
     // On events
     void onKey(Event& event);
     void onClose(Event& event);
+    void onResize(Event& event);
 
     // STATIC
     static void resizeCallback(GLFWwindow*, int, int);

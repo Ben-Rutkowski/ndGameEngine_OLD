@@ -1,6 +1,5 @@
 #define APPLICATION_MACROS
 #include "application.h"
-#include <iostream>
 
 // Initialization --------------------------------
 ndApp::ndApp()
@@ -41,13 +40,13 @@ void ndApp::distributeEvent(Event& event)
 // Set callbacks
 void ndApp::setEventCallback()
 {
-    GET_CALLBACK(ndApp::eventCallback, callback)
+    CAST_VOID(ndApp::eventCallback, callback)
     event_manager.setEventCallback(callback);
 }
 
 // STATIC Callbacks 
 void ndApp::eventCallback(void* ptr, Event& event)
 {
-    GET_APP(ptr, app)
+    CAST_APP(ptr, app)
     app->distributeEvent(event);
 }

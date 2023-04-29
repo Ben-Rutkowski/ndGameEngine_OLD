@@ -1,4 +1,3 @@
-#define WINDOW_MACROS
 #include "window.h"
 
 // Initialization --------------------------------
@@ -68,8 +67,9 @@ void ndWindow::runEvent(Event& event)
 {
     switch (event.getType())
     {
-    case EventType::KEY:   onKey(event);   break;
-    case EventType::CLOSE: onClose(event); break;
+    case EventType::KEY:    onKey(event);    break;
+    case EventType::CLOSE:  onClose(event);  break;
+    case EventType::RESIZE: onResize(event); break;
     default:;
     }
 }
@@ -94,6 +94,12 @@ void ndWindow::onClose(Event& event)
 {
     log.addSuccess(EntryOperation::CLOSE, true);
     setShouldClose(true);
+}
+
+void ndWindow::onResize(Event& event)
+{
+    width  = event.getWidth();
+    height = event.getHeight();
 }
 
 // STATIC
