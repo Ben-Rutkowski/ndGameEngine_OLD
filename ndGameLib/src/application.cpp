@@ -20,6 +20,7 @@ void ndApp::runApplication()
     log.addSuccess(EntryOperation::START_RUN_LOOP, true);
     while (!window->getShouldClose())
     {
+        startLoopFrame();
         pollInputs();
         endLoopFrame();
     }
@@ -30,8 +31,8 @@ void ndApp::printLog(int len) { log.printLog(len); }
 
 // Private --------------------------------
 void ndApp::pollInputs()                  { window->pollInputs(event_manager); }
-void ndApp::startLoopFrame()              {}
-void ndApp::endLoopFrame()                { window->endLoopFrame(); }
+void ndApp::startLoopFrame()              { event_manager.callStartFrameEvent(); }
+void ndApp::endLoopFrame()                { event_manager.callEndFrameEvent(); }
 void ndApp::distributeEvent(Event& event) 
 {
     window->runEvent(event);
@@ -44,7 +45,7 @@ void ndApp::setEventCallback()
     event_manager.setEventCallback(callback);
 }
 
-// STATIC Callbacks 
+// STATIC 
 void ndApp::eventCallback(void* ptr, Event& event)
 {
     CAST_APP(ptr, app)

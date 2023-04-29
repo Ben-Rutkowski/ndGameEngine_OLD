@@ -23,6 +23,20 @@ public:
     void callKeyEvent(Key key);
     void callCloseEvent();
     void callResizeEvent(int width, int height);
+    void callStartFrameEvent();
+    void callEndFrameEvent();
 };
+
+#endif
+
+#ifdef EVENT_MANAGER_MACROS
+
+#define CALL_TYPE_EVENT(TYPE, ...) \
+    TYPE event(__VA_ARGS__); \
+    callEvent(event); \
+
+#define CALL_EVENT(TYPE) \
+    Event event(TYPE); \
+    callEvent(event); \
 
 #endif

@@ -67,9 +67,11 @@ void ndWindow::runEvent(Event& event)
 {
     switch (event.getType())
     {
-    case EventType::KEY:    onKey(event);    break;
-    case EventType::CLOSE:  onClose(event);  break;
-    case EventType::RESIZE: onResize(event); break;
+    case EventType::KEY:         onKey(event);        break;
+    case EventType::CLOSE:       onClose(event);      break;
+    case EventType::RESIZE:      onResize(event);     break;
+    case EventType::START_FRAME: onStartFrame(event); break;
+    case EventType::END_FRAME:   onEndFrame(event);   break;
     default:;
     }
 }
@@ -80,7 +82,7 @@ void ndWindow::printLog(int len) { log.printLog(len); }
 // PRIVATE --------------------------------
 bool ndWindow::isPressed(int key) { return glfwGetKey(glfw_window, key) == GLFW_PRESS; }
 
-// On events 
+// EVENTS ++++++++++++++++++++++++++++++++
 void ndWindow::onKey(Event& event)
 {
     switch (event.getKey())
@@ -102,10 +104,17 @@ void ndWindow::onResize(Event& event)
     height = event.getHeight();
 }
 
+void ndWindow::onStartFrame(Event& event) {}
+void ndWindow::onEndFrame(Event& event)
+{
+    glfwPollEvents();
+    glfwSwapBuffers(glfw_window);
+}
+// +++++++++++++++++++++++++++++++++++++++
+
 // STATIC
 void ndWindow::resizeCallback(GLFWwindow* window, int width, int height) { getManager(window)->callResizeEvent(width, height); } 
 void ndWindow::closeCallback(GLFWwindow* window)                         { getManager(window)->callCloseEvent(); }
-
 EventManager* ndWindow::getManager(GLFWwindow* window)
 {
     void* ptr = glfwGetWindowUserPointer(window);

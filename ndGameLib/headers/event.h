@@ -3,7 +3,7 @@
 
 enum class EventType
 {
-    KEY, CLOSE, RESIZE
+    KEY, CLOSE, RESIZE, START_FRAME, END_FRAME
 };
 
 enum class Key

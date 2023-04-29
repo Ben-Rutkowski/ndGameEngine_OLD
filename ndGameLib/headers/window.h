@@ -17,9 +17,11 @@ private:
     bool isPressed(int key);
 
     // On events
-    void onKey(Event& event);
-    void onClose(Event& event);
-    void onResize(Event& event);
+    void onKey(Event& );
+    void onClose(Event&);
+    void onResize(Event&);
+    void onStartFrame(Event&);
+    void onEndFrame(Event&);
 
     // STATIC
     static void resizeCallback(GLFWwindow*, int, int);
