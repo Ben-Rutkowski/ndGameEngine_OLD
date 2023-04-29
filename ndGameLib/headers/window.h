@@ -36,9 +36,6 @@ public:
     void setDimensions(int width_in, int height_in);
     void setShouldClose(bool value);
     bool getShouldClose();
-
-    // Runtime
-    void endLoopFrame();
     
     // Events
     void runEvent(Event& event);

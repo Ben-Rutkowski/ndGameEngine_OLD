@@ -30,9 +30,13 @@ void ndApp::runApplication()
 void ndApp::printLog(int len) { log.printLog(len); }
 
 // Private --------------------------------
-void ndApp::pollInputs()                  { window->pollInputs(event_manager); }
 void ndApp::startLoopFrame()              { event_manager.callStartFrameEvent(); }
 void ndApp::endLoopFrame()                { event_manager.callEndFrameEvent(); }
+void ndApp::pollInputs()
+{
+    window->pollInputs(event_manager);
+    event_manager.callQueue();
+}
 void ndApp::distributeEvent(Event& event) 
 {
     window->runEvent(event);

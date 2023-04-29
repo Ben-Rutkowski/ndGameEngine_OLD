@@ -49,13 +49,6 @@ void ndWindow::setDimensions(int width_in, int height_in)
     height = height_in;
 }
 
-// Runtime --------------------------------
-void ndWindow::endLoopFrame()
-{
-    glfwPollEvents();
-    glfwSwapBuffers(glfw_window);
-}
-
 // Events --------------------------------
 void ndWindow::pollInputs(EventManager& event_manager)
 {
@@ -87,7 +80,7 @@ void ndWindow::onKey(Event& event)
 {
     switch (event.getKey())
     {
-    case Key::ESCAPE_KEY: event_manager->callCloseEvent(); break;
+    case Key::ESCAPE_KEY: event_manager->queueEvent(EventType::CLOSE); break;
     default:;
     }
 }
