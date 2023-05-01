@@ -1,27 +1,6 @@
 #define EVENT_MANAGER_MACROS
 #include "event_manager.h"
 
-// Event Cache    ++++++++++++++++++++++++++++++++
-// Initialization --------------------------------
-EventCache::EventCache() : event_counter{ 0 }, resize_event_counter{ 0 } {}
-void EventCache::queueEvent(EventType type)
-{
-    event_queue[event_counter] = Event(type);
-    event_counter++;
-}
-void         EventCache::queueResizeEvent(int width, int height) { resize_queue = ResizeEvent(width, height); }
-Event*       EventCache::getCurrentEvent()                       { return &event_queue[event_counter]; }
-ResizeEvent* EventCache::getCurrentResizeEvent()                 { return &resize_queue; }
-
-// Interface --------------------------------
-void EventCache::resetEventCounter()       { event_counter = 0; }
-void EventCache::clearCurrentEvent()       { event_queue[event_counter] = Event(); stepCount(); }
-void EventCache::resetResizeEventCounter() { resize_event_counter = 0; }
-void EventCache::clearCurrentResizeEvent() { resize_queue = ResizeEvent(); }
-
-// Private --------------------------------
-void EventCache::stepCount() { event_counter = (event_counter+1)%QUEUE_LEN; }
-
 // EventManager   ++++++++++++++++++++++++++++++++
 // Initialization --------------------------------
 EventManager::EventManager(void* ptr) : app_ptr{ ptr }, control_key{ false } {}
@@ -51,6 +30,29 @@ void EventManager::callKeyEvent(Key key)                  { CALL_TYPE_EVENT(KeyE
 void EventManager::callResizeEvent(int width, int height) { CALL_TYPE_EVENT(ResizeEvent, width, height) }
 
 // Private --------------------------------
-void EventManager::callEvent(Event& event) { event_callback(app_ptr, event); }
+void EventManager::callEvent(Event& event)  { event_callback(app_ptr, event); }
 void EventManager::callQueuedEvents()       { CALL_QUEUE(resetEventCounter(), getCurrentEvent(), clearCurrentEvent()) }
 void EventManager::callQueuedResizeEvents() { CALL_QUEUE(resetResizeEventCounter(), getCurrentResizeEvent(), clearCurrentResizeEvent()) }
+
+
+
+// Event Cache    ++++++++++++++++++++++++++++++++
+// Initialization --------------------------------
+EventCache::EventCache() : event_counter{ 0 }, resize_event_counter{ 0 } {}
+void EventCache::queueEvent(EventType type)
+{
+    event_queue[event_counter] = Event(type);
+    event_counter++;
+}
+void         EventCache::queueResizeEvent(int width, int height) { resize_queue = ResizeEvent(width, height); }
+Event*       EventCache::getCurrentEvent()                       { return &event_queue[event_counter]; }
+ResizeEvent* EventCache::getCurrentResizeEvent()                 { return &resize_queue; }
+
+// Interface --------------------------------
+void EventCache::resetEventCounter()       { event_counter = 0; }
+void EventCache::clearCurrentEvent()       { event_queue[event_counter] = Event(); stepCount(); }
+void EventCache::resetResizeEventCounter() { resize_event_counter = 0; }
+void EventCache::clearCurrentResizeEvent() { resize_queue = ResizeEvent(); }
+
+// Private --------------------------------
+void EventCache::stepCount() { event_counter = (event_counter+1)%QUEUE_LEN; }
