@@ -54,6 +54,10 @@ void ndWindow::pollInputs(EventManager& event_manager)
 {
     if (isPressed(GLFW_KEY_ESCAPE))
         event_manager.callKeyEvent(Key::ESCAPE_KEY);
+    else if (isPressed(GLFW_KEY_W))
+        event_manager.callKeyEvent(Key::W_KEY);
+    else
+        event_manager.setControlKey(isPressed(GLFW_KEY_LEFT_SUPER));
 }
 
 void ndWindow::runEvent(Event& event)
@@ -75,14 +79,21 @@ void ndWindow::printLog(int len) { log.printLog(len); }
 // PRIVATE --------------------------------
 bool ndWindow::isPressed(int key) { return glfwGetKey(glfw_window, key) == GLFW_PRESS; }
 
-// EVENTS ++++++++++++++++++++++++++++++++
+// EVENTS 
 void ndWindow::onKey(Event& event)
 {
-    switch (event.getKey())
-    {
-    case Key::ESCAPE_KEY: event_manager->queueEvent(EventType::CLOSE); break;
-    default:;
-    }
+    if (event_manager->getControlKey())
+        switch (event.getKey())
+        {
+        case Key::W_KEY : event_manager->queueEvent(EventType::CLOSE); break;
+        default:;
+        }
+    else
+        switch (event.getKey())
+        {
+        case Key::ESCAPE_KEY: break;
+        default:;
+        }
 }
 
 void ndWindow::onClose(Event& event)
@@ -103,7 +114,6 @@ void ndWindow::onEndFrame(Event& event)
     glfwPollEvents();
     glfwSwapBuffers(glfw_window);
 }
-// +++++++++++++++++++++++++++++++++++++++
 
 // STATIC
 void ndWindow::resizeCallback(GLFWwindow* window, int width, int height) { getManager(window)->callResizeEvent(width, height); } 

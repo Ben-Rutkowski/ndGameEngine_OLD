@@ -37,6 +37,7 @@ class EventManager
 {
 private:
     EventCache cache;
+    bool       control_key;
 
     void*    app_ptr;
     evt_call event_callback;
@@ -49,7 +50,9 @@ private:
 public: 
     // Initialization
     EventManager(void* ptr);
+    void setControlKey(bool press);
     void setEventCallback(void* ptr);
+    bool getControlKey();
 
     // Cache
     void queueEvent(EventType type);

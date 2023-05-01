@@ -1,7 +1,7 @@
 #define EVENT_MANAGER_MACROS
 #include "event_manager.h"
 
-// Event Cache
+// Event Cache    ++++++++++++++++++++++++++++++++
 // Initialization --------------------------------
 EventCache::EventCache() : event_counter{ 0 }, resize_event_counter{ 0 } {}
 void EventCache::queueEvent(EventType type)
@@ -22,15 +22,17 @@ void EventCache::clearCurrentResizeEvent() { resize_queue = ResizeEvent(); }
 // Private --------------------------------
 void EventCache::stepCount() { event_counter = (event_counter+1)%QUEUE_LEN; }
 
-
-// EventManager
+// EventManager   ++++++++++++++++++++++++++++++++
 // Initialization --------------------------------
-EventManager::EventManager(void* ptr) : app_ptr{ ptr } {}
+EventManager::EventManager(void* ptr) : app_ptr{ ptr }, control_key{ false } {}
+void EventManager::setControlKey(bool press) { control_key = press; }
 void EventManager::setEventCallback(void* ptr)
 {
     evt_call callback = (evt_call)ptr;
     event_callback    = callback;
 }
+
+bool EventManager::getControlKey()           { return control_key; }
 
 // Cache --------------------------------
 void EventManager::queueEvent(EventType type)              { cache.queueEvent(type); }
@@ -40,7 +42,6 @@ void EventManager::callQueue()
     callQueuedEvents();
     callQueuedResizeEvents();
 }
-
 
 // Event --------------------------------
 void EventManager::callCloseEvent()                       { CALL_EVENT(EventType::CLOSE); }

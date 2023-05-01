@@ -12,7 +12,9 @@ enum class Key
 {
     NULL_KEY,
 
-    ESCAPE_KEY
+    ESCAPE_KEY,
+    COMMAND_KEY,
+    W_KEY
 };
 
 class Event
