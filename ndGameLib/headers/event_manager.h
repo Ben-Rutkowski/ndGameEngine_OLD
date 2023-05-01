@@ -6,12 +6,14 @@
 #define QUEUE_LEN 4
 typedef void(*evt_call)(void*, Event&);
 
+// Event Cache ++++++++++++++++++++++++++++++++
 class EventCache
 {
 private:
     Event       event_queue[QUEUE_LEN];
-    int         event_counter;
     ResizeEvent resize_queue;
+    int         event_counter;
+    int         resize_event_counter;
 
 private:
     void stepCount();
@@ -24,11 +26,13 @@ public:
     ResizeEvent* getCurrentResizeEvent();
     
     // Interface
-    void reseEventCounter();
+    void resetEventCounter();
     void clearCurrentEvent();
+    void resetResizeEventCounter();
     void clearCurrentResizeEvent();
 };
 
+// EventManager ++++++++++++++++++++++++++++++++
 class EventManager
 {
 private:
@@ -62,6 +66,7 @@ public:
 
 #endif
 
+// Macros ++++++++++++++++++++++++++++++++
 #ifdef EVENT_MANAGER_MACROS
 
 #define CALL_TYPE_EVENT(TYPE, ...) \
@@ -71,5 +76,15 @@ public:
 #define CALL_EVENT(TYPE) \
     Event event(TYPE); \
     callEvent(event); \
+
+#define CALL_QUEUE(RESET_COUNTER, GET_CURRENT, CLEAR_CURRENT) \
+    cache.RESET_COUNTER; \
+    Event* current_event = cache.GET_CURRENT; \
+    while (!current_event->isNull()) \
+    { \
+        callEvent(*current_event); \
+        cache.CLEAR_CURRENT; \
+        current_event = cache.GET_CURRENT; \
+    } \
 
 #endif

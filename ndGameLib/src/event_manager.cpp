@@ -3,7 +3,7 @@
 
 // Event Cache
 // Initialization --------------------------------
-EventCache::EventCache() : event_counter{ 0 } {}
+EventCache::EventCache() : event_counter{ 0 }, resize_event_counter{ 0 } {}
 void EventCache::queueEvent(EventType type)
 {
     event_queue[event_counter] = Event(type);
@@ -14,8 +14,9 @@ Event*       EventCache::getCurrentEvent()                       { return &event
 ResizeEvent* EventCache::getCurrentResizeEvent()                 { return &resize_queue; }
 
 // Interface --------------------------------
-void EventCache::reseEventCounter()            { event_counter = 0; }
-void EventCache::clearCurrentEvent()       { event_queue[event_counter] = Event(); event_counter++; }
+void EventCache::resetEventCounter()       { event_counter = 0; }
+void EventCache::clearCurrentEvent()       { event_queue[event_counter] = Event(); stepCount(); }
+void EventCache::resetResizeEventCounter() { resize_event_counter = 0; }
 void EventCache::clearCurrentResizeEvent() { resize_queue = ResizeEvent(); }
 
 // Private --------------------------------
@@ -50,25 +51,5 @@ void EventManager::callResizeEvent(int width, int height) { CALL_TYPE_EVENT(Resi
 
 // Private --------------------------------
 void EventManager::callEvent(Event& event) { event_callback(app_ptr, event); }
-void EventManager::callQueuedEvents()
-{
-    cache.reseEventCounter();
-    Event* current_event = cache.getCurrentEvent();
-    while (!current_event->isNull())
-    {
-        callEvent(*current_event);
-        cache.clearCurrentEvent();
-        current_event = cache.getCurrentEvent();
-    }
-}
-
-void EventManager::callQueuedResizeEvents()
-{
-    ResizeEvent* current_event = cache.getCurrentResizeEvent();
-    while (!current_event->isNull())
-    {
-        callEvent(*current_event);
-        cache.clearCurrentResizeEvent();
-        current_event = cache.getCurrentResizeEvent();
-    }
-}
+void EventManager::callQueuedEvents()       { CALL_QUEUE(resetEventCounter(), getCurrentEvent(), clearCurrentEvent()) }
+void EventManager::callQueuedResizeEvents() { CALL_QUEUE(resetResizeEventCounter(), getCurrentResizeEvent(), clearCurrentResizeEvent()) }
