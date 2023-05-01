@@ -4,7 +4,8 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/ndGameLib/headers/**",
-                "${workspaceFolder}/dependencies/include/**"
+                "${workspaceFolder}/dependencies/include/**",
+                "${workspaceFolder}/sandbox/headers/**"
             ],
             "defines": [],
             "macFrameworkPath": [

@@ -5,7 +5,8 @@ enum class EntryType
 {
     NULL_TYPE,
 
-    SUCCESS
+    SUCCESS,
+    SHADER_UPLOAD
 };
 
 enum class EntryOperation
@@ -23,7 +24,8 @@ enum class Module
     NULL_MODULE,
 
     APPLICATION,
-    WINDOW
+    WINDOW,
+    SHADER
 };
 
 class Entry
@@ -46,7 +48,14 @@ public:
     void successData(bool success);
 
     // Print
-    void printEntry();    
+    virtual void printEntry();    
+};
+
+
+// ShaderEntry ++++++++++++++++++++++++++++++++
+class ShaderEntry
+{
+public:
 };
 
 #endif

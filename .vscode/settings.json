@@ -60,7 +60,12 @@
         "variant": "cpp",
         "vector": "cpp",
         "algorithm": "cpp",
-        "__verbose_abort": "cpp"
+        "__verbose_abort": "cpp",
+        "deque": "cpp",
+        "fstream": "cpp",
+        "iomanip": "cpp",
+        "stack": "cpp",
+        "filesystem": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

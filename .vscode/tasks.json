@@ -13,6 +13,7 @@
 				"-g",
 				"-I${workspaceFolder}/ndGameLib/headers",
 				"-I${workspaceFolder}/dependencies/include",
+				"-I${workspaceFolder}/sandbox/headers/",
 				"-L${workspaceFolder}/dependencies/lib",
 				"${workspaceFolder}/dependencies/lib/libglfw.3.3.dylib",
 				"${workspaceFolder}/compiled/lib/ndGame.a",
