@@ -17,7 +17,8 @@ private:
     bool isPressed(int key);
 
     // On events
-    void onKey(Event& );
+    void onBeginApp(Event&);
+    void onKey(Event&);
     void onClose(Event&);
     void onResize(Event&);
     void onStartFrame(Event&);

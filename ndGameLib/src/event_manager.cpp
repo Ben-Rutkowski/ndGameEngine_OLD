@@ -23,6 +23,7 @@ void EventManager::callQueue()
 }
 
 // Event --------------------------------
+void EventManager::callBeginAppEvent()                    { CALL_EVENT(EventType::BEGIN_APP) }
 void EventManager::callCloseEvent()                       { CALL_EVENT(EventType::CLOSE); }
 void EventManager::callStartFrameEvent()                  { CALL_EVENT(EventType::START_FRAME) }
 void EventManager::callEndFrameEvent()                    { CALL_EVENT(EventType::END_FRAME) }

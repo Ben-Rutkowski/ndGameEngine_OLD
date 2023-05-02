@@ -64,6 +64,7 @@ void ndWindow::runEvent(Event& event)
 {
     switch (event.getType())
     {
+    case EventType::BEGIN_APP:   onBeginApp(event);   break;
     case EventType::KEY:         onKey(event);        break;
     case EventType::CLOSE:       onClose(event);      break;
     case EventType::RESIZE:      onResize(event);     break;
@@ -96,6 +97,11 @@ void ndWindow::onKey(Event& event)
         }
 }
 
+void ndWindow::onBeginApp(Event& event)
+{
+    
+}
+
 void ndWindow::onClose(Event& event)
 {
     log.addSuccess(EntryOperation::CLOSE, true);
@@ -106,9 +112,15 @@ void ndWindow::onResize(Event& event)
 {
     width  = event.getWidth();
     height = event.getHeight();
+    glViewport(0, 0, width, height);
 }
 
-void ndWindow::onStartFrame(Event& event) {}
+void ndWindow::onStartFrame(Event& event)
+{
+    glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
 void ndWindow::onEndFrame(Event& event)
 {
     glfwPollEvents();

@@ -62,6 +62,7 @@ public:
     // Event
     void callKeyEvent(Key key);
     void callResizeEvent(int width, int height);
+    void callBeginAppEvent();
     void callCloseEvent();
     void callStartFrameEvent();
     void callEndFrameEvent();

@@ -27,6 +27,7 @@ public:
 
 private:
     void pollInputs();
+    void beginApp();
     void startLoopFrame();
     void endLoopFrame();
     void distributeEvent(Event& event);

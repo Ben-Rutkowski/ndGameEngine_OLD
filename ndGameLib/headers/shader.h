@@ -37,7 +37,6 @@ public:
 
     // Log
     void printLog();
-
 };
 
 #endif

@@ -5,7 +5,8 @@ enum class EventType
 {
     NULL_TYPE,
 
-    KEY, CLOSE, RESIZE, START_FRAME, END_FRAME
+    KEY, CLOSE, RESIZE, START_FRAME, END_FRAME,
+    BEGIN_APP
 };
 
 enum class Key
