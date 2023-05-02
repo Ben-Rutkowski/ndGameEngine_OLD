@@ -2,7 +2,6 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <string>
 
 // Initialization --------------------------------
 ndShaderProgram::ndShaderProgram() : log{ Module::SHADER } {}
@@ -51,10 +50,10 @@ void ndShaderProgram::logProgramCompiled()
     if (!success)
     {
         glGetProgramInfoLog(program_id, 512, NULL, info_log);
-        log.addSuccess(EntryOperation::TEST, true);
+        log.addSuccessLog(EntryOperation::LINK_SHADER_PROGRAM, false, info_log);
     }
     else
-        log.addSuccess(EntryOperation::TEST, true);
+        log.addSuccess(EntryOperation::LINK_SHADER_PROGRAM, true);
 }
 
 void ndShaderProgram::logShaderCompiled(unsigned int id)
@@ -65,10 +64,10 @@ void ndShaderProgram::logShaderCompiled(unsigned int id)
     if (!success)
     {
         glGetShaderInfoLog(id, 512, NULL, info_log);
-        log.addSuccess(EntryOperation::TEST, true);
+        log.addSuccessLog(EntryOperation::COMPILE_SHADER, false, info_log);
     }
     else
-        log.addSuccess(EntryOperation::TEST, true);
+        log.addSuccess(EntryOperation::COMPILE_SHADER, true);
 }
 
 int ndShaderProgram::getGLType(ShaderType type)
@@ -104,11 +103,11 @@ std::string ndShaderProgram::openShaderFile(const char* file_path)
         file_stream << file.rdbuf();
         file.close();
         code_string = file_stream.str();
-        log.addSuccess(EntryOperation::TEST, true);
+        log.addSuccess(EntryOperation::READ_SHADER_FILE, true);
     }
     catch (std::ifstream::failure e)
     {
-        log.addSuccess(EntryOperation::TEST, false);
+        log.addSuccess(EntryOperation::READ_SHADER_FILE, false);
     }
 
     return code_string;
