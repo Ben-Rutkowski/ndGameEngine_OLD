@@ -26,6 +26,7 @@ void ndShaderProgram::compileProgram()
     program_id = glCreateProgram();
     glAttachShader(program_id, vertex_id);
     glAttachShader(program_id, fragment_id);
+    glLinkProgram(program_id);
 
     // Check compiled
     logProgramCompiled();

@@ -26,4 +26,5 @@ void Log::printLog(int len)
 {
     for (int i=0; i<len; i++)
         log[i].printEntry();
+    std::cout << std::endl;
 }

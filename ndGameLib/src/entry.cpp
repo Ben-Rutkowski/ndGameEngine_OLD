@@ -51,10 +51,10 @@ void Entry::printSuccess()
     switch (data)
     {
     case 0x00000001: std::cout << std::endl; break;
-    default:         std::cout << "Failure" << std::endl;
+    default:         std::cout << "::Failure" << std::endl;
     }
 
-    // printInfoLog();
+    printInfoLog();
 }
 
 void Entry::printModule()

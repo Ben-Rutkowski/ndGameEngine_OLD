@@ -11,6 +11,6 @@ int main()
     app.init();
     app.runApplication();
 
-    app.printLog(512);
-    window.printLog(512);
+    // app.printLog(512);
+    // window.printLog(512);
 }

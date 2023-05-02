@@ -7,4 +7,5 @@ const int   HEIGHT = 1080;
 const char* TITLE  = "ndGameEngine";
 
 // Test shader file paths
-const char* test_vertex = "/Users/benjaminrutkowski/Projects/ndGameEngine/sandbox/shaders/test/vertex.vs";
+// const char* test_vertex   = "/Users/benjaminrutkowski/Projects/ndGameEngine/ndGameLib/shaders/test/vertex.vs";
+// const char* test_fragment = "/Users/benjaminrutkowski/Projects/ndGameEngine/ndGameLib/shaders/test/fragment.fs";
