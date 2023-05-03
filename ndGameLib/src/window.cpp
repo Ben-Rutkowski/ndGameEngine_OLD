@@ -1,4 +1,5 @@
 #include "window.h"
+#include <iostream>
 
 // Initialization --------------------------------
 ndWindow::ndWindow(int width_in, int height_in, const char* title)
@@ -13,7 +14,7 @@ ndWindow::ndWindow(int width_in, int height_in, const char* title)
     log.addSuccess(EntryOperation::INIT_GLFW, true);
 
     // Create GLFW window
-    glfw_window = glfwCreateWindow(width, height, title, NULL, NULL);
+    glfw_window = glfwCreateWindow(width/2, height/2, title, NULL, NULL);
     if (glfw_window == NULL)
         log.addSuccess(EntryOperation::CREATE_GLFW_WINDOW, false);
     else
@@ -41,12 +42,6 @@ void ndWindow::setEventManager(void* ptr)
 {
     event_manager = (EventManager*)ptr;
     glfwSetWindowUserPointer(glfw_window, ptr);
-}
-
-void ndWindow::setDimensions(int width_in, int height_in) 
-{
-    width  = width_in;
-    height = height_in;
 }
 
 // Events --------------------------------
@@ -110,8 +105,8 @@ void ndWindow::onClose(Event& event)
 
 void ndWindow::onResize(Event& event)
 {
-    width  = event.getWidth();
-    height = event.getHeight();
+    width  = event.getWidth()*2;
+    height = event.getHeight()*2;
     glViewport(0, 0, width, height);
 }
 
@@ -119,6 +114,7 @@ void ndWindow::onStartFrame(Event& event)
 {
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
+    glViewport(0, 0, width, height);
 }
 
 void ndWindow::onEndFrame(Event& event)

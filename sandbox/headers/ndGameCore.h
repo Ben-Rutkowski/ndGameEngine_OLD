@@ -2,8 +2,8 @@
 #include "glad_glfw.h"
 
 // Constants
-const int   WIDTH  = 1920;
-const int   HEIGHT = 1080;
+const int   WIDTH  = 800;
+const int   HEIGHT = 600;
 const char* TITLE  = "ndGameEngine";
 
 // Test shader file paths

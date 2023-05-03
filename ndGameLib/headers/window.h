@@ -34,7 +34,6 @@ public:
     ndWindow(int width, int height, const char* title);
     void setCallbacks();
     void setEventManager(void* ptr);
-    void setDimensions(int width_in, int height_in);
     void setShouldClose(bool value);
     bool getShouldClose();
     
