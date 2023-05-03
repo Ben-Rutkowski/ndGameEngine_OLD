@@ -1,11 +1,12 @@
 #include "ndGameCore.h"
-#include "shader.h"
+#include "frame.h"
 #include <iostream>
 
 int main()
 {
     ndApp    app;
     ndWindow window(WIDTH, HEIGHT, TITLE);
+    ndFrame::init();
     app.attachWindow(&window);
 
     app.init();

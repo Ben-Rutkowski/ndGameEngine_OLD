@@ -1,10 +1,6 @@
 #define APPLICATION_MACROS
 #include "application.h"
-#include "shader.h"
-#include "vao.h"
-
-const char* test_vertex   = "/Users/benjaminrutkowski/Projects/ndGameEngine/ndGameLib/shaders/test/vertex.vs";
-const char* test_fragment = "/Users/benjaminrutkowski/Projects/ndGameEngine/ndGameLib/shaders/test/fragment.fs";
+#include "frame.h"
 
 // Initialization --------------------------------
 ndApp::ndApp()
@@ -22,26 +18,8 @@ void ndApp::init() { setEventCallback(); }
 // Runtime --------------------------------
 void ndApp::runApplication()
 {
-    float vertices[] = {
-        -0.5f, -0.5f, 0.0f,
-         0.5f, -0.5f, 0.0f,
-         0.0f,  0.5f, 0.0
-    };
-
-    unsigned int elements[] = {
-        0, 1, 2
-    };
-
-    VAO vao;
-    vao.loadArrayStatic(sizeof(vertices), vertices);
-    vao.loadElementStatic(sizeof(elements), elements);
-    vao.addAttribPointerf(3, 0);
-
-    ndShaderProgram program;
-    program.attachShader(test_vertex, ShaderType::VERTEX);
-    program.attachShader(test_fragment, ShaderType::FRAGMENT);
-    program.compileProgram();
-    program.printLog();
+    ndFrame my_frame;
+    my_frame.calculateBufferData();
 
     beginApp();
     while (!window->getShouldClose())
@@ -49,8 +27,8 @@ void ndApp::runApplication()
         startLoopFrame();
         pollInputs();
 
-        vao.drawTriangles(1, program);
-        
+        my_frame.draw();
+
         endLoopFrame();
     }
 }
