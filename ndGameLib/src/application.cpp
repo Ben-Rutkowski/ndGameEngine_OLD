@@ -1,6 +1,5 @@
 #define APPLICATION_MACROS
 #include "application.h"
-#include "frame.h"
 
 // Initialization --------------------------------
 ndApp::ndApp()
@@ -18,17 +17,11 @@ void ndApp::init() { setEventCallback(); }
 // Runtime --------------------------------
 void ndApp::runApplication()
 {
-    ndFrame my_frame;
-    my_frame.calculateBufferData();
-
     beginApp();
     while (!window->getShouldClose())
     {
         startLoopFrame();
         pollInputs();
-
-        my_frame.draw();
-
         endLoopFrame();
     }
 }
