@@ -36,6 +36,23 @@ void ndShaderProgram::compileProgram()
     glDeleteShader(fragment_id);
 }
 
+void ndShaderProgram::compileProgramGeo()
+{
+    // Comiple program
+    program_id = glCreateProgram();
+    glAttachShader(program_id, vertex_id);
+    glAttachShader(program_id, fragment_id);
+    glAttachShader(program_id, geometry_id);
+    glLinkProgram(program_id);
+
+    // Check compiled
+    logProgramCompiled();
+
+    // Delete shaders
+    glDeleteShader(vertex_id);
+    glDeleteShader(fragment_id);
+}
+
 // Runtime
 void ndShaderProgram::use() { glUseProgram(program_id); }
 
@@ -75,8 +92,9 @@ int ndShaderProgram::getGLType(ShaderType type)
 {
     switch (type)
     {
-        case ShaderType::VERTEX:   return GL_VERTEX_SHADER; break;
+        case ShaderType::VERTEX:   return GL_VERTEX_SHADER;   break;
         case ShaderType::FRAGMENT: return GL_FRAGMENT_SHADER; break;
+        case ShaderType::GEOMETRY: return GL_GEOMETRY_SHADER; break;
         default: return 0;
     }
 }
@@ -85,8 +103,9 @@ unsigned int* ndShaderProgram::getId(ShaderType type)
 {
     switch (type)
     {
-    case ShaderType::VERTEX:   return &vertex_id; break;
+    case ShaderType::VERTEX:   return &vertex_id;   break;
     case ShaderType::FRAGMENT: return &fragment_id; break;
+    case ShaderType::GEOMETRY: return &geometry_id; break;
     default: return (unsigned int*)0;
     }
 }

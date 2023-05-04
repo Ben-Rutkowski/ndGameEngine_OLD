@@ -23,6 +23,9 @@ private:
 public:
     ndFrame();
 
+    // Rendering
+    void draw();
+
 // STATIC
     static void init();
 };

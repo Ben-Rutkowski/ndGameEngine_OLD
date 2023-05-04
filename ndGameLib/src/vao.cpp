@@ -57,3 +57,11 @@ void VAO::drawTriangles(int triangle_num, ndShaderProgram& program)
     glDrawElements(GL_TRIANGLES, element_num, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
+
+void VAO::drawPoints(int point_num, ndShaderProgram& program)
+{
+    program.use();
+    glBindVertexArray(vao);
+    glDrawElements(GL_POINTS, point_num, GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
+}

@@ -18,6 +18,7 @@ public:
 
     // Rendering
     void drawTriangles(int triangle_num, ndShaderProgram& program);
+    void drawPoints(int point_num, ndShaderProgram& program);
 };
 
 #endif

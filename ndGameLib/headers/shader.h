@@ -7,7 +7,7 @@
 
 enum class ShaderType
 {
-    VERTEX, FRAGMENT,
+    VERTEX, FRAGMENT, GEOMETRY,
 
     LENGTH
 };
@@ -17,8 +17,10 @@ class ndShaderProgram
 private:
     Log log;
     unsigned int program_id;
+
     unsigned int vertex_id;
     unsigned int fragment_id;
+    unsigned int geometry_id;
 
 private:
     void          logProgramCompiled();
@@ -31,6 +33,7 @@ public:
     ndShaderProgram();
     void attachShader(const char* file_path, ShaderType type);
     void compileProgram();
+    void compileProgramGeo();
 
     // Runtime
     void use();

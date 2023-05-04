@@ -1,5 +1,7 @@
 #define APPLICATION_MACROS
 #include "application.h"
+#include "vao.h"
+#include "shader_paths.h"
 
 // Initialization --------------------------------
 ndApp::ndApp()
@@ -17,11 +19,37 @@ void ndApp::init() { setEventCallback(); }
 // Runtime --------------------------------
 void ndApp::runApplication()
 {
+    float data[] = 
+    {
+        0.0, 0.0
+    };
+
+    unsigned int elements[] =
+    {
+        0
+    };
+
+    ndShaderProgram my_program;
+    my_program.attachShader(TEST_V, ShaderType::VERTEX);
+    my_program.attachShader(TEST_G, ShaderType::GEOMETRY);
+    my_program.attachShader(TEST_F, ShaderType::FRAGMENT);
+    my_program.compileProgramGeo();
+    // my_program.compileProgram();
+
+    VAO my_buffer;
+
+    my_buffer.loadArrayStatic(sizeof(data), data);
+    my_buffer.loadElementStatic(sizeof(elements), elements);
+    my_buffer.addAttribPointerf(2, 0);
+
     beginApp();
     while (!window->getShouldClose())
     {
         startLoopFrame();
         pollInputs();
+
+        my_buffer.drawPoints(1, my_program);
+
         endLoopFrame();
     }
 }
