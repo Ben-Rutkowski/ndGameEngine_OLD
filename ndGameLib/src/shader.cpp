@@ -53,6 +53,19 @@ void ndShaderProgram::compileProgramGeo()
     glDeleteShader(fragment_id);
 }
 
+// Uniforms
+void ndShaderProgram::uniform1f(float value, const char* name)
+{
+    int location = glGetUniformLocation(program_id, name);
+    glUniform1f(location, value);
+}
+
+void ndShaderProgram::uniform2f(vec2 value, const char* name)
+{
+    int location = glGetUniformLocation(program_id, name);
+    glUniform2f(location, value.x(), value.y());
+}
+
 // Runtime
 void ndShaderProgram::use() { glUseProgram(program_id); }
 

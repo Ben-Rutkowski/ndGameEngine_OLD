@@ -1,11 +1,13 @@
 #include "ndGameCore.h"
+#include "compiled_shaders.h"
 #include <iostream>
 
 int main()
 {
     ndApp    app;
     ndWindow window(WIDTH, HEIGHT, TITLE);
-    // ndFrame::init();
+    ShaderArray::compileShaders();
+
     app.attachWindow(&window);
 
     app.init();

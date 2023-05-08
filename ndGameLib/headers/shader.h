@@ -1,5 +1,6 @@
 #include "glad_glfw.h"
 #include "log.h"
+#include "vec.h"
 #include <string>
 
 #ifndef SHADER_H
@@ -34,6 +35,10 @@ public:
     void attachShader(const char* file_path, ShaderType type);
     void compileProgram();
     void compileProgramGeo();
+
+    // Uniforms
+    void uniform1f(float value, const char* name);
+    void uniform2f(vec2 value, const char* name);
 
     // Runtime
     void use();

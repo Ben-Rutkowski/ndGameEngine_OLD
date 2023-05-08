@@ -1,7 +1,7 @@
 #define APPLICATION_MACROS
 #include "application.h"
 #include "vao.h"
-#include "shader_paths.h"
+#include "word.h"
 
 // Initialization --------------------------------
 ndApp::ndApp()
@@ -19,28 +19,9 @@ void ndApp::init() { setEventCallback(); }
 // Runtime --------------------------------
 void ndApp::runApplication()
 {
-    float data[] = 
-    {
-        0.0, 0.0
-    };
-
-    unsigned int elements[] =
-    {
-        0
-    };
-
-    ndShaderProgram my_program;
-    my_program.attachShader(TEST_V, ShaderType::VERTEX);
-    my_program.attachShader(TEST_G, ShaderType::GEOMETRY);
-    my_program.attachShader(TEST_F, ShaderType::FRAGMENT);
-    my_program.compileProgramGeo();
-    // my_program.compileProgram();
-
-    VAO my_buffer;
-
-    my_buffer.loadArrayStatic(sizeof(data), data);
-    my_buffer.loadElementStatic(sizeof(elements), elements);
-    my_buffer.addAttribPointerf(2, 0);
+    Word my_word("abcdef");
+    my_word.loadBuffer();
+    vec2 pos(0.0f, 0.0f);
 
     beginApp();
     while (!window->getShouldClose())
@@ -48,7 +29,7 @@ void ndApp::runApplication()
         startLoopFrame();
         pollInputs();
 
-        my_buffer.drawPoints(1, my_program);
+        my_word.draw(pos, 0.1f);
 
         endLoopFrame();
     }

@@ -2,7 +2,7 @@
 #include "glad_glfw.h"
 
 // Initialization --------------------------------
-VAO::VAO() : attrib_index{ 0 }
+VAO::VAO()
 {
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
@@ -33,35 +33,32 @@ void VAO::loadElementStatic(int size, void* data)
     glBindVertexArray(0);
 }
 
-void VAO::addAttribPointerf(int vec_size, int offset)
+void VAO::addAttribPointerf(int index, int vec_size, int data_size, int offset)
 {
-    void* data_offset = (void*)(offset * sizeof(float));
-    int   data_size   = vec_size * sizeof(float);
+    void* vec_offset = (void*)(offset * sizeof(float));
 
     glBindVertexArray(vao);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glVertexAttribPointer(attrib_index, vec_size, GL_FLOAT, GL_FALSE, data_size, data_offset);
-    glEnableVertexAttribArray(attrib_index);
+    glVertexAttribPointer(index, vec_size, GL_FLOAT, GL_FALSE, data_size, vec_offset);
+    glEnableVertexAttribArray(index);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
-
-    attrib_index++;    
+    glBindVertexArray(0);  
 }
 
 // Rendering --------------------------------
-void VAO::drawTriangles(int triangle_num, ndShaderProgram& program)
+void VAO::drawTriangles(int triangle_num, ndShaderProgram* program)
 {
     int element_num = 3 * triangle_num;
-    program.use();
+    program->use();
     glBindVertexArray(vao);
     glDrawElements(GL_TRIANGLES, element_num, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
 
-void VAO::drawPoints(int point_num, ndShaderProgram& program)
+void VAO::drawPoints(int point_num, ndShaderProgram* program)
 {
-    program.use();
+    program->use();
     glBindVertexArray(vao);
-    glDrawElements(GL_POINTS, point_num, GL_UNSIGNED_INT, 0);
+    glDrawArrays(GL_POINTS, 0, point_num);
     glBindVertexArray(0);
 }

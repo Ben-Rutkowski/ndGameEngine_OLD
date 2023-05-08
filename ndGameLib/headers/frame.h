@@ -10,26 +10,6 @@
 // In frame optiions: sliders, check-box, number fill-in, color selection,
 //                    mode select, window/layer system, scroll wheel               
 
-class ndFrame
-{
-private:
-    VAO vao;
-    float width, height;
-    float x_pos, y_pos;
-
-// STATIC
-    static ndShaderProgram program;
-
-public:
-    ndFrame();
-
-    // Rendering
-    void draw();
-
-// STATIC
-    static void init();
-};
-
 #endif
 
 #ifdef FRAME_MACROS
