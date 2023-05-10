@@ -6,10 +6,7 @@
 class mat4
 {
 private:
-    vec4 x_col;
-    vec4 y_col;
-    vec4 z_col;
-    vec4 w_col;
+    float mat[4][4];
 
 public:
     mat4();

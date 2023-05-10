@@ -3,46 +3,22 @@
 
 mat4::mat4() {}
 mat4::mat4(vec4 x_in, vec4 y_in, vec4 z_in, vec4 w_in)
-: x_col{ x_in },
-  y_col{ y_in },
-  z_col{ z_in },
-  w_col{ w_in } {}
-
-void mat4::set(int i, int j, float value)
 {
-    switch (j)
-    {
-    case 0:  x_col.set(i, value); break;
-    case 1:  y_col.set(i, value); break;
-    case 2:  z_col.set(i, value); break;
-    case 3:  w_col.set(i, value); break;
-    default: break;
-    }
+    setCol(0, x_in);
+    setCol(1, y_in);
+    setCol(2, z_in);
+    setCol(3, w_in);
 }
+
+void mat4::set(int i, int j, float value) { mat[i][j] = value; }
 
 void mat4::setCol(int j, vec4 col)
 {
-    switch (j)
-    {
-    case 0:  x_col = col; break;
-    case 1:  y_col = col; break;
-    case 2:  z_col = col; break;
-    case 3:  w_col = col; break;
-    default: break;
-    }
+    for (int i=0; i<4; i++)
+        mat[i][j] = col[i];
 }
 
-float mat4::get(int i, int j)
-{
-    switch (j)
-    {
-    case 0:  return x_col[i]; break;
-    case 1:  return y_col[i]; break;
-    case 2:  return z_col[i]; break;
-    case 3:  return w_col[i]; break;
-    default: return 0.0f; break;
-    }
-}
+float mat4::get(int i, int j) { return mat[i][j]; }
 
 vec4 mat4::getCol(int j) { return vec4(get(0, j), get(1, j), get(2, j), get(3, j)); }
 vec4 mat4::getRow(int i) { return vec4(get(i, 0), get(i, 1), get(i, 2), get(i, 3)); }

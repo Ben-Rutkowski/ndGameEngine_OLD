@@ -1,23 +1,10 @@
 #ifndef VEC_H
 #define VEC_H
 
-class vec2
-{
-private:
-    float x_val, y_val;
-
-public:
-    vec2(float x_in, float y_in);
-    vec2();
-    float x();
-    float y();
-    float operator[](int);
-};
-
 class vec4
 {
 private:
-    float x_val, y_val, z_val, w_val;
+    float vec[4];
 
 public:
     vec4();
@@ -35,5 +22,20 @@ public:
     // STATIC
     static vec4 basis(int i);
 };
+
+class vec2
+{
+private:
+    float x_val, y_val;
+
+public:
+    vec2(float x_in, float y_in);
+    vec2();
+    float x();
+    float y();
+    float operator[](int);
+};
+
+
 
 #endif
