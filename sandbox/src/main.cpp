@@ -1,5 +1,6 @@
 #include "ndGameCore.h"
 #include "compiled_shaders.h"
+#include "mat.h"
 #include <iostream>
 
 int main()

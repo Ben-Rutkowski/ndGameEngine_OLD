@@ -47,6 +47,8 @@ void ndApp::pollInputs()
     window->pollInputs(event_manager);
     event_manager.callQueue();
 }
+
+// Events 
 void ndApp::distributeEvent(Event& event) 
 {
     window->runEvent(event);
