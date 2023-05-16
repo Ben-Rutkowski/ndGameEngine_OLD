@@ -1,0 +1,18 @@
+TODO:
+
+- Create word buffer object to batch render words with a single draw call
+    - this will require reformating the word and letter classes
+
+- Implement a font bitmap
+    - potientially build a simple glyph creator module and texture rasterizer to 
+      create unique fonts
+
+- Reformat vec and mat classes so that it uses inheritance
+
+- Create draw event that runs for each resize
+
+- Reorganize the directory to be more organized
+   - new build and compile tasks
+   - add delete all library objects and recompile whole library
+
+- Create frame and frame module objects
