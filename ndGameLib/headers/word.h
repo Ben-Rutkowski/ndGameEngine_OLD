@@ -34,7 +34,7 @@ public:
 
     // Rendering 
     void loadBuffer();
-    void draw(vec2 position, float size);
+    void draw(int width, int height, int size, vec2 pos);
 };
 
 #endif

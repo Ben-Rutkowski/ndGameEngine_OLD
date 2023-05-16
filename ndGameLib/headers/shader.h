@@ -1,6 +1,7 @@
 #include "glad_glfw.h"
 #include "log.h"
 #include "vec.h"
+#include "mat.h"
 #include <string>
 
 #ifndef SHADER_H
@@ -39,6 +40,7 @@ public:
     // Uniforms
     void uniform1f(float value, const char* name);
     void uniform2f(vec2 value, const char* name);
+    void uniform4x4f(mat4 value, const char* name);
 
     // Runtime
     void use();

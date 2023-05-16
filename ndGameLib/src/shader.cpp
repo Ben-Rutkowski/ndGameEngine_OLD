@@ -66,6 +66,12 @@ void ndShaderProgram::uniform2f(vec2 value, const char* name)
     glUniform2f(location, value.x(), value.y());
 }
 
+void ndShaderProgram::uniform4x4f(mat4 value, const char* name)
+{
+    int location = glGetUniformLocation(program_id, name);
+    glUniformMatrix4fv(location, 1, GL_FALSE, value.getPtr());
+}
+
 // Runtime
 void ndShaderProgram::use() { glUseProgram(program_id); }
 

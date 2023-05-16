@@ -45,3 +45,5 @@ float vec2::operator[](int i)
         default: return 0.0f; break;
     }
 }
+
+void vec2::screentToLetter(float ratio) { x_val = ratio*x_val; }

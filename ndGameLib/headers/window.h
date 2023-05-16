@@ -1,6 +1,7 @@
 #include "glad_glfw.h"
 #include "event_manager.h"
 #include "log.h"
+#include "mat.h"
 
 #ifndef WINDOW_H
 #define WINDOW_H
@@ -32,10 +33,12 @@ private:
 public:
     // Initialization
     ndWindow(int width, int height, const char* title);
-    void setCallbacks();
-    void setEventManager(void* ptr);
-    void setShouldClose(bool value);
-    bool getShouldClose();
+    void  setCallbacks();
+    void  setEventManager(void* ptr);
+    void  setShouldClose(bool value);
+    bool  getShouldClose();
+    int   getWidth();
+    int   getHeight();
     
     // Events
     void runEvent(Event& event);

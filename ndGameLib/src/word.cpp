@@ -62,12 +62,14 @@ void Word::loadBuffer()
     buffer.addAttribPointerf(3, 1, data_width, 6); // float index
 }
 
-void Word::draw(vec2 position, float size)
+void Word::draw(int width, int height, int size, vec2 pos)
 {
+    mat4 view_mat = mat4::letterToClip(width, height, size, pos);
+
     program->use();
     program->uniform1f(advance, "v_adv");
-    program->uniform2f(position, "v_origin");
     program->uniform1f(size, "a_size");
+    program->uniform4x4f(view_mat, "g_view_mat");
 
     buffer.drawPoints(len, program);
 }

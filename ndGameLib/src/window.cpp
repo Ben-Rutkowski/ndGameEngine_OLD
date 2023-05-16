@@ -36,9 +36,12 @@ void ndWindow::setCallbacks()
     glfwSetWindowCloseCallback(glfw_window, ndWindow::closeCallback);
 }
 
-void ndWindow::setShouldClose(bool value) { glfwSetWindowShouldClose(glfw_window, true); }
-bool ndWindow::getShouldClose()           { return glfwWindowShouldClose(glfw_window); }
-void ndWindow::setEventManager(void* ptr)
+void  ndWindow::setShouldClose(bool value) { glfwSetWindowShouldClose(glfw_window, true); }
+bool  ndWindow::getShouldClose()           { return glfwWindowShouldClose(glfw_window); }
+int   ndWindow::getWidth()                 { return width; }
+int   ndWindow::getHeight()                { return height; }
+
+void  ndWindow::setEventManager(void* ptr)
 {
     event_manager = (EventManager*)ptr;
     glfwSetWindowUserPointer(glfw_window, ptr);
@@ -105,16 +108,14 @@ void ndWindow::onClose(Event& event)
 
 void ndWindow::onResize(Event& event)
 {
-    width  = event.getWidth()*2;
-    height = event.getHeight()*2;
-    glViewport(0, 0, width, height);
+    width  = event.getWidth()*2.0f;
+    height = event.getHeight()*2.0f;
 }
 
 void ndWindow::onStartFrame(Event& event)
 {
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-    glViewport(0, 0, width, height);
 }
 
 void ndWindow::onEndFrame(Event& event)

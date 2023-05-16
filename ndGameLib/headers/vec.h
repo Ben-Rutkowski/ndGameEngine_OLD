@@ -34,6 +34,9 @@ public:
     float x();
     float y();
     float operator[](int);
+
+    // Transform
+    void screentToLetter(float ratio);
 };
 
 

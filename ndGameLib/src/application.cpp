@@ -2,6 +2,7 @@
 #include "application.h"
 #include "vao.h"
 #include "word.h"
+#include <iostream>
 
 // Initialization --------------------------------
 ndApp::ndApp()
@@ -21,7 +22,9 @@ void ndApp::runApplication()
 {
     Word my_word("abcdef");
     my_word.loadBuffer();
-    vec2 pos(0.0f, 0.0f);
+    vec2 pos(0.7f, 0.7f);
+    float ratio;
+    int width, height;
 
     beginApp();
     while (!window->getShouldClose())
@@ -29,7 +32,9 @@ void ndApp::runApplication()
         startLoopFrame();
         pollInputs();
 
-        my_word.draw(pos, 0.1f);
+        width = window->getWidth();
+        height = window->getHeight();
+        my_word.draw(width, height, 100, pos);
 
         endLoopFrame();
     }
